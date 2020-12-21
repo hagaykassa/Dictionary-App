@@ -1,4 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
+import getWords from "./ArrayOfWords";
 
   export default class DictionaryMgmt {
     words:Array<string>;
@@ -17,7 +18,7 @@ import { makeObservable, observable, action } from "mobx";
             letterInDictionaryCounter:observable,
             updateWords: action
         })
-        this.words = ["apple", "juice","window","desk","watch","book","door","house"];
+        this.words = getWords();
         this.startWithCounter = 0;
         this.endWithCounter = 0;
         this.containCounter = 0;

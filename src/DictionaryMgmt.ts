@@ -17,7 +17,7 @@ import { makeObservable, observable, action } from "mobx";
             letterInDictionaryCounter:observable,
             updateWords: action
         })
-        this.words = ["a", "ss", "sas", "dsa", "oro", "oaoa","salsa","arssaa","ttts"];
+        this.words = ["apple", "juice","window","desk","watch","book","door","house"];
         this.startWithCounter = 0;
         this.endWithCounter = 0;
         this.containCounter = 0;

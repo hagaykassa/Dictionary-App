@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import DictionaryMgmt from "../DictionaryMgmt";
+import DictionaryMgmt from "../Logic/DictionaryMgmt";
 import {observer} from "mobx-react-lite";
 import BarChart from "./barChart";
 import styled from '@emotion/styled'
@@ -16,8 +16,7 @@ border: 2px solid #555;
   }
 `
 const ChartDiv = styled.div`
-max-width: 90%;
-margin:2% 5%;
+margin:2% 0%;
 `
 const dictionaryObj = new DictionaryMgmt();
 

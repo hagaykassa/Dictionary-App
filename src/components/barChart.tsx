@@ -2,7 +2,6 @@ import React from 'react';
 import {Bar, defaults} from 'react-chartjs-2'
 
 defaults.global.defaultFontColor = 'black';
-defaults.global.defaultFontSize= 14;
 export interface BarChartProps{
     dictionaryObj:{
         words:Array<string>;

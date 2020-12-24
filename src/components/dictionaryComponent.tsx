@@ -1,7 +1,6 @@
-import React,{useState} from 'react';
-import SearchIcon from '@material-ui/icons/Search';
+import React, { useMemo } from 'react';
 import DictionaryMgmt from "../Logic/DictionaryMgmt";
-import {observer} from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import BarChart from "./barChart";
 import styled from '@emotion/styled'
 import InitialView from "../components/initialView"
@@ -18,37 +17,28 @@ border: 2px solid #555;
 const ChartDiv = styled.div`
 margin:2% 0%;
 `
-const dictionaryObj = new DictionaryMgmt();
 
-     const DictionaryView= observer(()=>
-    {
+const DictionaryView = observer(() => {
 
-    const [letter,setLetter]= useState<string | undefined>(undefined);
-    const [selectedLetter,setSelectedLetter]= useState<string | undefined>(undefined);
-    
-    const handleChange = (e: React.FormEvent<HTMLInputElement>)=>{
-        setLetter(e.currentTarget.value);
+    const dictionaryObj = useMemo(() => new DictionaryMgmt(), [])
+
+    const handleChange = (value: string) => {
+        dictionaryObj.updateLetter(value)
     }
 
-    function onclick(){
-     setSelectedLetter(letter);
-     dictionaryObj.updateWords(letter);
-    } 
-
-    return(
+    return (
         <div>
             <h1> Dictionary App</h1>
             <SearchDiv>
-                <Input onChange= {handleChange} placeholder="Enter letter"/>
-                <SearchIcon onClick={onclick}/>
+                <Input onChange={((e) => handleChange(e.currentTarget.value))}
+                    placeholder="Enter letter" maxLength={1}/>
             </SearchDiv>
             <ChartDiv>
-                {selectedLetter&&<BarChart dictionaryObj={dictionaryObj}
-                    selectedLetter={selectedLetter}/>}
+                {dictionaryObj.selectedLetter && <BarChart getCounters={dictionaryObj.getCounters}
+                    selectedLetter={dictionaryObj.selectedLetter} />}
             </ChartDiv>
+            {!dictionaryObj.selectedLetter && <InitialView />}
 
-            {!selectedLetter&&<InitialView/>}
-            
         </div>
     )
 });
